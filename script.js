@@ -1,8 +1,8 @@
 const USERNAME = "HRifaldi";
-const EXCLUDED_REPOS = new Set(["restapi", "HRifaldi"]);
+const EXCLUDED_REPOS = new Set(["restapi", "HRifaldi", "portofolio"]);
 const CONTACT_LINKS = {
   linkedin: "https://www.linkedin.com/in/hernanda-rifaldi/",
-  email: ""
+  email: "rifaldi.hernanda01@gmail.com"
 };
 
 const KNOWN_DESCRIPTIONS = {
