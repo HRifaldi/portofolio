@@ -7,15 +7,15 @@ const CONTACT_LINKS = {
 
 const KNOWN_DESCRIPTIONS = {
   "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline":
-    "Pipeline end-to-end untuk mendeteksi merchant berisiko melalui proses ETL, validasi data, dan dashboard monitoring.",
+    "An end-to-end pipeline to detect risky merchants using ETL processes, data validation, and monitoring dashboards.",
   "trash-garbage-classification":
-    "Model computer vision untuk klasifikasi jenis sampah ke beberapa kategori utama.",
+    "A computer vision model for classifying waste images into key categories.",
   "RiskBeacon-credit-risk-probability":
-    "Sistem scoring risiko kredit berbasis machine learning untuk membantu keputusan approval pinjaman.",
+    "A machine learning credit risk scoring system to support loan approval decisions.",
   "Evaluation-PoU-in-Indonesia-2018-2024":
-    "Analisis data tren Prevalence of Undernourishment di Indonesia periode 2018-2024.",
+    "A data analysis of Prevalence of Undernourishment trends across Indonesia from 2018 to 2024.",
   "depression-prediction":
-    "Model klasifikasi untuk memprediksi risiko depresi berbasis faktor mental health mahasiswa."
+    "A classification model to predict depression risk based on student mental health factors."
 };
 
 const fallbackProjects = [
@@ -101,7 +101,7 @@ function inferDescription(repoName) {
     .replaceAll("_", " ")
     .trim();
 
-  return `Project bertema ${cleaned} dengan fokus implementasi data dan machine learning.`;
+  return `A ${cleaned} project focused on practical data and machine learning implementation.`;
 }
 
 function normalizeDescription(repo) {
@@ -115,7 +115,7 @@ function normalizeDescription(repo) {
 
 function formatDate(isoDate) {
   const date = new Date(isoDate);
-  return new Intl.DateTimeFormat("id-ID", {
+  return new Intl.DateTimeFormat("en-US", {
     year: "numeric",
     month: "short",
     day: "2-digit"
@@ -163,7 +163,7 @@ function renderProjects() {
   if (!sorted.length) {
     els.grid.innerHTML = `
       <div class="empty-state">
-        Tidak ada proyek yang cocok dengan kata kunci pencarian.
+        No projects match your search keyword.
       </div>
     `;
     return;
@@ -180,9 +180,9 @@ function renderProjects() {
           <span class="project-lang">${escapeHtml(project.language || "Mixed")}</span>
           <h3>${escapeHtml(project.name)}</h3>
           <p>${escapeHtml(normalizeDescription(project))}</p>
-          <div class="project-meta">Terakhir update: ${escapeHtml(formatDate(project.pushed_at))}</div>
+          <div class="project-meta">Last updated: ${escapeHtml(formatDate(project.pushed_at))}</div>
           <div class="project-actions">
-            <a class="primary" href="${escapeHtml(project.html_url)}" target="_blank" rel="noreferrer">Lihat Repo</a>
+            <a class="primary" href="${escapeHtml(project.html_url)}" target="_blank" rel="noreferrer">View Repo</a>
             ${demo}
           </div>
         </article>
@@ -193,7 +193,7 @@ function renderProjects() {
 
 function setLoadingState() {
   els.grid.innerHTML = `
-    <div class="empty-state">Memuat project dari GitHub...</div>
+    <div class="empty-state">Loading projects from GitHub...</div>
   `;
 }
 
@@ -218,11 +218,11 @@ function setContactLinks(user) {
   const fallback = `https://github.com/${USERNAME}`;
   els.emailLink.href = fallback;
   els.emailLinkContact.href = fallback;
-  els.emailLink.textContent = "Email (set dulu)";
-  els.emailLinkContact.textContent = "Email (set dulu)";
+  els.emailLink.textContent = "Email (set first)";
+  els.emailLinkContact.textContent = "Email (set first)";
   els.emailLink.classList.add("is-disabled");
   els.emailLinkContact.classList.add("is-disabled");
-  els.emailStatus.textContent = "Email publik belum tersedia. Isi CONTACT_LINKS.email di script.js untuk menampilkan email kamu.";
+  els.emailStatus.textContent = "Public email is not available yet. Set CONTACT_LINKS.email in script.js to show your email.";
 }
 
 function hydrateProfile(user) {
@@ -230,7 +230,7 @@ function hydrateProfile(user) {
   els.displayName.textContent = displayName;
   els.githubProfileLink.href = user.html_url || `https://github.com/${USERNAME}`;
   els.profileImage.src = user.avatar_url || "https://avatars.githubusercontent.com/u/92579281?v=4";
-  els.profileImage.alt = `Foto profil ${displayName}`;
+  els.profileImage.alt = `${displayName} profile photo`;
 
   if (user.bio && user.bio.trim()) {
     els.bioText.textContent = user.bio.trim();
@@ -246,7 +246,7 @@ async function fetchPortfolioData() {
   ]);
 
   if (!userRes.ok || !repoRes.ok) {
-    throw new Error("Gagal mengambil data dari GitHub API.");
+    throw new Error("Failed to fetch data from the GitHub API.");
   }
 
   const user = await userRes.json();
