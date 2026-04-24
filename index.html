@@ -19,6 +19,7 @@
     <nav class="top-nav">
       <a href="#about">About</a>
       <a href="#projects">Projects</a>
+      <a href="#huggingface">Hugging Face</a>
       <a href="#contact">Contact</a>
     </nav>
   </header>
@@ -36,6 +37,7 @@
       <div class="hero-actions">
         <a class="btn btn-solid" href="#projects">View Projects</a>
         <a class="btn btn-outline" id="githubProfileLink" href="https://github.com/HRifaldi" target="_blank" rel="noreferrer">GitHub Profile</a>
+        <a class="btn btn-outline" id="huggingFaceProfileLink" href="https://huggingface.co/HRifaldi" target="_blank" rel="noreferrer">Hugging Face</a>
         <a class="btn btn-outline" id="linkedinLink" href="https://www.linkedin.com/in/hernanda-rifaldi/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a class="btn btn-outline" id="emailLink" href="#">Email</a>
       </div>
@@ -55,6 +57,10 @@
         <li>
           <span id="latestUpdate">-</span>
           <small>Latest update</small>
+        </li>
+        <li>
+          <span id="hfCount">0</span>
+          <small>HF spaces</small>
         </li>
       </ul>
     </aside>
@@ -90,11 +96,20 @@
       <div id="projectGrid" class="project-grid" aria-live="polite"></div>
     </section>
 
+    <section id="huggingface" class="projects section-block">
+      <div class="projects-head">
+        <h2>Hugging Face Projects</h2>
+        <p>Public Spaces from your Hugging Face profile are listed here automatically.</p>
+      </div>
+      <div id="hfGrid" class="project-grid" aria-live="polite"></div>
+    </section>
+
     <section id="contact" class="contact section-block">
       <h2>Let's Connect</h2>
       <p>If you're interested in collaborating on data or AI projects, feel free to reach out through these channels.</p>
       <div class="hero-actions">
         <a class="btn btn-solid" href="https://github.com/HRifaldi" target="_blank" rel="noreferrer">GitHub</a>
+        <a class="btn btn-outline" href="https://huggingface.co/HRifaldi" target="_blank" rel="noreferrer">Hugging Face</a>
         <a class="btn btn-outline" id="linkedinLinkContact" href="https://www.linkedin.com/in/hernanda-rifaldi/" target="_blank" rel="noreferrer">LinkedIn</a>
         <a class="btn btn-outline" id="emailLinkContact" href="#">Email</a>
       </div>
