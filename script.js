@@ -5,6 +5,10 @@ const CONTACT_LINKS = {
   linkedin: "https://www.linkedin.com/in/hernanda-rifaldi/",
   email: "rifaldi.hernanda01@gmail.com"
 };
+const PROJECT_DEMO_LINKS = {
+  "Evaluation-PoU-in-Indonesia-2018-2024":
+    "https://public.tableau.com/app/profile/hernanda.rifaldi/viz/PerubahanPoU2018ke2024/Dashboard7"
+};
 
 const KNOWN_DESCRIPTIONS = {
   "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline":
@@ -50,7 +54,7 @@ const fallbackProjects = [
     description: KNOWN_DESCRIPTIONS["Evaluation-PoU-in-Indonesia-2018-2024"],
     language: "Jupyter Notebook",
     pushed_at: "2026-04-23T10:10:22Z",
-    homepage: ""
+    homepage: PROJECT_DEMO_LINKS["Evaluation-PoU-in-Indonesia-2018-2024"]
   },
   {
     name: "depression-prediction",
@@ -223,8 +227,9 @@ function renderProjects() {
 
   els.grid.innerHTML = sorted
     .map((project) => {
-      const demo = project.homepage
-        ? `<a href="${escapeHtml(project.homepage)}" target="_blank" rel="noreferrer">Demo</a>`
+      const demoUrl = project.homepage || PROJECT_DEMO_LINKS[project.name] || "";
+      const demo = demoUrl
+        ? `<a href="${escapeHtml(demoUrl)}" target="_blank" rel="noreferrer">Demo</a>`
         : "";
 
       return `
