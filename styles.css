@@ -260,6 +260,10 @@ main {
   margin: 0;
 }
 
+.featured-demo {
+  margin-top: 0.8rem;
+}
+
 .project-tools {
   display: grid;
   grid-template-columns: 1fr 170px;
@@ -310,18 +314,6 @@ main {
   border-radius: 999px;
   background: #eaf6f6;
   color: #0f6b6d;
-}
-
-.project-source {
-  width: fit-content;
-  font-size: 0.72rem;
-  font-weight: 700;
-  letter-spacing: 0.3px;
-  text-transform: uppercase;
-  padding: 0.3rem 0.6rem;
-  border-radius: 999px;
-  background: #fff4e8;
-  color: #9e4e2c;
 }
 
 .project-card h3 {

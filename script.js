@@ -1,5 +1,4 @@
 const USERNAME = "HRifaldi";
-const HUGGING_FACE_USERNAME = "HRifaldi";
 const EXCLUDED_REPOS = new Set(["restapi", "HRifaldi", "portofolio"]);
 const CONTACT_LINKS = {
   linkedin: "https://www.linkedin.com/in/hernanda-rifaldi/",
@@ -66,39 +65,8 @@ const fallbackProjects = [
   }
 ];
 
-const fallbackHfProjects = [
-  {
-    id: "HRifaldi/Garbage-Prediction",
-    name: "Garbage-Prediction",
-    type: "Space",
-    sdk: "docker",
-    url: "https://huggingface.co/spaces/HRifaldi/Garbage-Prediction",
-    createdAt: "2026-03-17T12:03:57.000Z",
-    description: "Interactive Space for garbage prediction and waste classification."
-  },
-  {
-    id: "HRifaldi/final-project",
-    name: "final-project",
-    type: "Space",
-    sdk: "docker",
-    url: "https://huggingface.co/spaces/HRifaldi/final-project",
-    createdAt: "2026-04-08T03:40:55.000Z",
-    description: "Interactive Space for the final machine learning project."
-  },
-  {
-    id: "HRifaldi/depresssion-prediction",
-    name: "depresssion-prediction",
-    type: "Space",
-    sdk: "streamlit",
-    url: "https://huggingface.co/spaces/HRifaldi/depresssion-prediction",
-    createdAt: "2026-04-19T12:11:04.000Z",
-    description: "Streamlit Space for depression risk prediction."
-  }
-];
-
 const state = {
   projects: [],
-  hfProjects: [],
   query: "",
   sort: "latest"
 };
@@ -110,14 +78,11 @@ const els = {
   projectCount: document.getElementById("projectCount"),
   languageCount: document.getElementById("languageCount"),
   latestUpdate: document.getElementById("latestUpdate"),
-  hfCount: document.getElementById("hfCount"),
   currentYear: document.getElementById("currentYear"),
   displayName: document.getElementById("displayName"),
   bioText: document.getElementById("bioText"),
   profileImage: document.getElementById("profileImage"),
-  hfGrid: document.getElementById("hfGrid"),
   githubProfileLink: document.getElementById("githubProfileLink"),
-  huggingFaceProfileLink: document.getElementById("huggingFaceProfileLink"),
   linkedinLink: document.getElementById("linkedinLink"),
   linkedinLinkContact: document.getElementById("linkedinLinkContact"),
   emailLink: document.getElementById("emailLink"),
@@ -141,22 +106,6 @@ function inferDescription(repoName) {
     .trim();
 
   return `A ${cleaned} project focused on practical data and machine learning implementation.`;
-}
-
-function normalizeHfDescription(repo) {
-  if (repo.description && repo.description.trim().length > 20) {
-    return repo.description.trim();
-  }
-
-  if (repo.type === "Space") {
-    return `Interactive ${repo.sdk || "web"} Space hosted on Hugging Face.`;
-  }
-
-  if (repo.type === "Model") {
-    return "Machine learning model repository on Hugging Face.";
-  }
-
-  return "Dataset repository on Hugging Face.";
 }
 
 function normalizeDescription(repo) {
@@ -189,7 +138,6 @@ function sortProjects(projects) {
 
 function renderStats(projects) {
   els.projectCount.textContent = String(projects.length);
-  els.hfCount.textContent = String(state.hfProjects.length);
 
   const langs = new Set(projects.map((project) => project.language || "Unknown"));
   els.languageCount.textContent = String(langs.size);
@@ -252,36 +200,6 @@ function setLoadingState() {
   els.grid.innerHTML = `
     <div class="empty-state">Loading projects from GitHub...</div>
   `;
-  els.hfGrid.innerHTML = `
-    <div class="empty-state">Loading projects from Hugging Face...</div>
-  `;
-}
-
-function renderHfProjects() {
-  const sorted = [...state.hfProjects].sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
-
-  if (!sorted.length) {
-    els.hfGrid.innerHTML = `
-      <div class="empty-state">No Hugging Face repositories found.</div>
-    `;
-    return;
-  }
-
-  els.hfGrid.innerHTML = sorted
-    .map((project) => {
-      return `
-        <article class="project-card">
-          <span class="project-source">Hugging Face ${escapeHtml(project.type)}</span>
-          <h3>${escapeHtml(project.name)}</h3>
-          <p>${escapeHtml(normalizeHfDescription(project))}</p>
-          <div class="project-meta">Created: ${escapeHtml(formatDate(project.createdAt))}</div>
-          <div class="project-actions">
-            <a class="primary" href="${escapeHtml(project.url)}" target="_blank" rel="noreferrer">Open on Hugging Face</a>
-          </div>
-        </article>
-      `;
-    })
-    .join("");
 }
 
 function setContactLinks(user) {
@@ -316,7 +234,6 @@ function hydrateProfile(user) {
   const displayName = user.name && user.name.trim() ? user.name : user.login;
   els.displayName.textContent = displayName;
   els.githubProfileLink.href = user.html_url || `https://github.com/${USERNAME}`;
-  els.huggingFaceProfileLink.href = `https://huggingface.co/${HUGGING_FACE_USERNAME}`;
   els.profileImage.src = user.avatar_url || "https://avatars.githubusercontent.com/u/92579281?v=4";
   els.profileImage.alt = `${displayName} profile photo`;
 
@@ -347,66 +264,6 @@ async function fetchPortfolioData() {
   return { user, projects };
 }
 
-function toArray(payload) {
-  if (Array.isArray(payload)) return payload;
-  if (payload && Array.isArray(payload.value)) return payload.value;
-  return [];
-}
-
-async function fetchHuggingFaceData() {
-  const [spacesRes, modelsRes, datasetsRes] = await Promise.all([
-    fetch(`https://huggingface.co/api/spaces?author=${HUGGING_FACE_USERNAME}&limit=100`),
-    fetch(`https://huggingface.co/api/models?author=${HUGGING_FACE_USERNAME}&limit=100`),
-    fetch(`https://huggingface.co/api/datasets?author=${HUGGING_FACE_USERNAME}&limit=100`)
-  ]);
-
-  const spaces = spacesRes.ok ? toArray(await spacesRes.json()) : [];
-  const models = modelsRes.ok ? toArray(await modelsRes.json()) : [];
-  const datasets = datasetsRes.ok ? toArray(await datasetsRes.json()) : [];
-
-  const mappedSpaces = spaces.map((space) => {
-    const repoName = (space.id || "").split("/")[1] || space.id || "Untitled Space";
-    return {
-      id: space.id,
-      name: repoName,
-      type: "Space",
-      sdk: space.sdk || "web",
-      url: `https://huggingface.co/spaces/${space.id}`,
-      createdAt: space.createdAt || new Date().toISOString(),
-      description: ""
-    };
-  });
-
-  const mappedModels = models.map((model) => {
-    const repoName = (model.id || "").split("/")[1] || model.id || "Untitled Model";
-    return {
-      id: model.id,
-      name: repoName,
-      type: "Model",
-      sdk: "model",
-      url: `https://huggingface.co/${model.id}`,
-      createdAt: model.createdAt || model.lastModified || new Date().toISOString(),
-      description: model.pipeline_tag ? `Model for ${model.pipeline_tag}.` : ""
-    };
-  });
-
-  const mappedDatasets = datasets.map((dataset) => {
-    const repoName = (dataset.id || "").split("/")[1] || dataset.id || "Untitled Dataset";
-    return {
-      id: dataset.id,
-      name: repoName,
-      type: "Dataset",
-      sdk: "dataset",
-      url: `https://huggingface.co/datasets/${dataset.id}`,
-      createdAt: dataset.createdAt || dataset.lastModified || new Date().toISOString(),
-      description: ""
-    };
-  });
-
-  const merged = [...mappedSpaces, ...mappedModels, ...mappedDatasets];
-  return merged;
-}
-
 function bindEvents() {
   els.searchInput.addEventListener("input", (event) => {
     state.query = event.target.value || "";
@@ -432,16 +289,8 @@ async function init() {
     state.projects = fallbackProjects;
   }
 
-  try {
-    const hfProjects = await fetchHuggingFaceData();
-    state.hfProjects = hfProjects.length ? hfProjects : fallbackHfProjects;
-  } catch (error) {
-    state.hfProjects = fallbackHfProjects;
-  }
-
   renderStats(state.projects);
   renderProjects();
-  renderHfProjects();
 }
 
 init();
