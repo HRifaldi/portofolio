@@ -5,6 +5,12 @@ const CONTACT_LINKS = {
   email: "rifaldi.hernanda01@gmail.com"
 };
 const PROJECT_DEMO_LINKS = {
+  "depression-prediction":
+    "https://huggingface.co/spaces/HRifaldi/depresssion-prediction",
+  "RiskBeacon-credit-risk-probability":
+    "https://huggingface.co/spaces/HRifaldi/final-project",
+  "trash-garbage-classification":
+    "https://huggingface.co/spaces/HRifaldi/Garbage-Prediction",
   "Evaluation-PoU-in-Indonesia-2018-2024":
     "https://public.tableau.com/app/profile/hernanda.rifaldi/viz/PerubahanPoU2018ke2024/Dashboard7"
 };
@@ -37,7 +43,7 @@ const fallbackProjects = [
     description: KNOWN_DESCRIPTIONS["trash-garbage-classification"],
     language: "Jupyter Notebook",
     pushed_at: "2026-04-23T10:58:02Z",
-    homepage: ""
+    homepage: PROJECT_DEMO_LINKS["trash-garbage-classification"]
   },
   {
     name: "RiskBeacon-credit-risk-probability",
@@ -45,7 +51,7 @@ const fallbackProjects = [
     description: KNOWN_DESCRIPTIONS["RiskBeacon-credit-risk-probability"],
     language: "Jupyter Notebook",
     pushed_at: "2026-04-23T10:21:57Z",
-    homepage: ""
+    homepage: PROJECT_DEMO_LINKS["RiskBeacon-credit-risk-probability"]
   },
   {
     name: "Evaluation-PoU-in-Indonesia-2018-2024",
@@ -61,7 +67,7 @@ const fallbackProjects = [
     description: KNOWN_DESCRIPTIONS["depression-prediction"],
     language: "Jupyter Notebook",
     pushed_at: "2026-04-23T09:45:55Z",
-    homepage: ""
+    homepage: PROJECT_DEMO_LINKS["depression-prediction"]
   }
 ];
 
