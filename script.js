@@ -121,7 +121,7 @@ function inferDescription(repoName) {
     .replaceAll("_", " ")
     .trim();
 
-  return `A ${cleaned} project focused on practical data and machine learning implementation.`;
+  return `${cleaned}: data project with implementation and clear business use case.`;
 }
 
 function normalizeDescription(repo) {
@@ -239,11 +239,11 @@ function setContactLinks(user) {
   const fallback = `https://github.com/${USERNAME}`;
   els.emailLink.href = fallback;
   els.emailLinkContact.href = fallback;
-  els.emailLink.textContent = "Email (set first)";
-  els.emailLinkContact.textContent = "Email (set first)";
+  els.emailLink.textContent = "Email via GitHub";
+  els.emailLinkContact.textContent = "Email via GitHub";
   els.emailLink.classList.add("is-disabled");
   els.emailLinkContact.classList.add("is-disabled");
-  els.emailStatus.textContent = "Public email is not available yet. Set CONTACT_LINKS.email in script.js to show your email.";
+  els.emailStatus.textContent = "Email publik belum tersedia, gunakan GitHub untuk menghubungi saya.";
 }
 
 function hydrateProfile(user) {

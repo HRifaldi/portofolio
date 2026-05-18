@@ -1,6 +1,6 @@
-# Portfolio Website (HRifaldi)
+# Rifaldi Data Lab
 
-Website portofolio statis yang menampilkan project terbaru langsung dari GitHub API (`HRifaldi`), dengan beberapa repo dikecualikan dari daftar.
+Website portofolio statis untuk menampilkan project terbaru langsung dari GitHub API (`HRifaldi`), dengan beberapa repo dikecualikan dari daftar.
 
 ## Struktur Utama
 - `index.html`: struktur halaman.
