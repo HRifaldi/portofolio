@@ -5,6 +5,8 @@ const CONTACT_LINKS = {
   email: "rifaldi.hernanda01@gmail.com"
 };
 const PROJECT_DEMO_LINKS = {
+  ecommerce_return:
+    "https://public.tableau.com/app/profile/hernanda.rifaldi/viz/ExecutiveOverview_17791102499410/SegmentDeepDive",
   "depression-prediction":
     "https://huggingface.co/spaces/HRifaldi/depresssion-prediction",
   "RiskBeacon-credit-risk-probability":
@@ -49,7 +51,7 @@ const fallbackProjects = [
     description: KNOWN_DESCRIPTIONS.ecommerce_return,
     language: "Python",
     pushed_at: "2026-05-18T00:00:00Z",
-    homepage: ""
+    homepage: PROJECT_DEMO_LINKS.ecommerce_return
   },
   {
     name: "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline",
