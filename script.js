@@ -16,6 +16,8 @@ const PROJECT_DEMO_LINKS = {
 };
 
 const KNOWN_DESCRIPTIONS = {
+  ecommerce_return:
+    "A machine learning project to predict e-commerce return risk with EDA, single-order scoring, and batch scoring dashboards.",
   "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline":
     "An end-to-end pipeline to detect risky merchants using ETL processes, data validation, and monitoring dashboards.",
   "trash-garbage-classification":
@@ -29,6 +31,14 @@ const KNOWN_DESCRIPTIONS = {
 };
 
 const fallbackProjects = [
+  {
+    name: "ecommerce_return",
+    html_url: "https://github.com/HRifaldi/ecommerce_return",
+    description: KNOWN_DESCRIPTIONS.ecommerce_return,
+    language: "Python",
+    pushed_at: "2026-05-18T00:00:00Z",
+    homepage: ""
+  },
   {
     name: "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline",
     html_url: "https://github.com/HRifaldi/E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline",
