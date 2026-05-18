@@ -253,10 +253,6 @@ function hydrateProfile(user) {
   els.profileImage.src = user.avatar_url || "https://avatars.githubusercontent.com/u/92579281?v=4";
   els.profileImage.alt = `${displayName} profile photo`;
 
-  if (user.bio && user.bio.trim()) {
-    els.bioText.textContent = user.bio.trim();
-  }
-
   setContactLinks(user);
 }
 

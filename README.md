@@ -1,39 +1,34 @@
 # Portfolio Website (HRifaldi)
 
-Website portofolio statis dengan data proyek dari GitHub API (`HRifaldi`) dan mengecualikan repo `restapi`.
+Website portofolio statis yang menampilkan project terbaru langsung dari GitHub API (`HRifaldi`), dengan beberapa repo dikecualikan dari daftar.
 
-## File utama
-- `index.html`
-- `styles.css`
-- `script.js`
+## Struktur Utama
+- `index.html`: struktur halaman.
+- `styles.css`: styling dan layout responsif.
+- `script.js`: integrasi GitHub API, filter, sorting, dan rendering kartu project.
 
-## Kontak
-- LinkedIn sudah di-set ke: `https://www.linkedin.com/in/hernanda-rifaldi/`
-- Email bisa diisi di `script.js` pada:
+## Konfigurasi Kontak
+Perbarui bagian berikut di `script.js`:
 
 ```js
 const CONTACT_LINKS = {
   linkedin: "https://www.linkedin.com/in/hernanda-rifaldi/",
-  email: ""
+  email: "rifaldi.hernanda01@gmail.com"
 };
 ```
 
-Isi `email` dengan alamat email kamu, contoh: `"hello@domain.com"`.
-
 ## Deploy GitHub Pages
-Workflow sudah disiapkan di `.github/workflows/deploy-pages.yml`.
+Workflow sudah tersedia di `.github/workflows/deploy-pages.yml`.
 
-Langkah:
-1. Push project ke branch `main`.
-2. Buka repo GitHub > `Settings` > `Pages`.
-3. Pada `Build and deployment`, pilih `Source: GitHub Actions`.
-4. Setelah workflow sukses, website tersedia di URL Pages repo tersebut.
+1. Push perubahan ke branch `main`.
+2. Buka `Settings` > `Pages` pada repo GitHub.
+3. Pilih `Source: GitHub Actions`.
+4. Tunggu workflow selesai, lalu akses URL GitHub Pages repo.
 
 ## Deploy Vercel
-File `vercel.json` sudah disiapkan untuk static site.
+Konfigurasi statis sudah tersedia di `vercel.json`.
 
-Langkah:
-1. Import repo ini ke Vercel.
+1. Import repo ke Vercel.
 2. Pilih framework `Other`.
-3. Build command kosong, output directory kosong.
-4. Klik deploy.
+3. Kosongkan build command dan output directory.
+4. Jalankan deploy.
