@@ -18,6 +18,8 @@ const PROJECT_DEMO_LINKS = {
 const KNOWN_DESCRIPTIONS = {
   "Olist-E-Commerce-Dataset":
     "An end-to-end e-commerce analytics project using Python ETL, Great Expectations validation, dbt modeling, and an interactive dashboard.",
+  "Olist E Commerce Dataset":
+    "An end-to-end e-commerce analytics project using Python ETL, Great Expectations validation, dbt modeling, and an interactive dashboard.",
   ecommerce_return:
     "A machine learning project to predict e-commerce return risk with EDA, single-order scoring, and batch scoring dashboards.",
   "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline":
@@ -131,7 +133,7 @@ function inferDescription(repoName) {
     .replaceAll("_", " ")
     .trim();
 
-  return `${cleaned}: data project with implementation and clear business use case.`;
+  return `${cleaned}: an end-to-end data engineering project covering ingestion, data quality checks, transformation, and analytics-ready outputs.`;
 }
 
 function normalizeDescription(repo) {
