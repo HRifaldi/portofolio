@@ -16,6 +16,8 @@ const PROJECT_DEMO_LINKS = {
 };
 
 const KNOWN_DESCRIPTIONS = {
+  "Olist-E-Commerce-Dataset":
+    "An end-to-end e-commerce analytics project using Python ETL, Great Expectations validation, dbt modeling, and an interactive dashboard.",
   ecommerce_return:
     "A machine learning project to predict e-commerce return risk with EDA, single-order scoring, and batch scoring dashboards.",
   "E-Commerce-Merchant-Fraud-Detection-and-Risk-Monitoring-Pipeline":
@@ -31,6 +33,14 @@ const KNOWN_DESCRIPTIONS = {
 };
 
 const fallbackProjects = [
+  {
+    name: "Olist-E-Commerce-Dataset",
+    html_url: "https://github.com/HRifaldi/Olist-E-Commerce-Dataset",
+    description: KNOWN_DESCRIPTIONS["Olist-E-Commerce-Dataset"],
+    language: "Python",
+    pushed_at: "2026-05-18T00:00:00Z",
+    homepage: ""
+  },
   {
     name: "ecommerce_return",
     html_url: "https://github.com/HRifaldi/ecommerce_return",
