@@ -17,7 +17,21 @@ const PROJECT_DEMO_LINKS = {
     "https://public.tableau.com/app/profile/hernanda.rifaldi/viz/PerubahanPoU2018ke2024/Dashboard7"
 };
 
+const MANUAL_PROJECTS = [
+  {
+    name: "Konvo Admin Console",
+    html_url: "https://frontend-dashboard-silk-beta.vercel.app/",
+    description:
+      "A WhatsApp-connected admin dashboard for monitoring conversations, scanning session QR codes, and reviewing live database-backed activity.",
+    language: "Next.js",
+    pushed_at: "2026-09-20T00:00:00Z",
+    homepage: "https://frontend-dashboard-silk-beta.vercel.app/"
+  }
+];
+
 const KNOWN_DESCRIPTIONS = {
+  "olist-data-engineering-pipeline":
+    "End-to-end data engineering pipeline on the Olist e-commerce dataset: Kafka, Airflow, PySpark, dbt, Snowflake, FastAPI, Docker.",
   "Olist-E-Commerce-Dataset":
     "An end-to-end e-commerce analytics project using Python ETL, Great Expectations validation, dbt modeling, and an interactive dashboard.",
   "Olist E Commerce Dataset":
@@ -37,6 +51,14 @@ const KNOWN_DESCRIPTIONS = {
 };
 
 const fallbackProjects = [
+  {
+    name: "olist-data-engineering-pipeline",
+    html_url: "https://github.com/HRifaldi/olist-data-engineering-pipeline",
+    description: KNOWN_DESCRIPTIONS["olist-data-engineering-pipeline"],
+    language: "Python",
+    pushed_at: "2026-09-07T11:01:43Z",
+    homepage: ""
+  },
   {
     name: "Olist-E-Commerce-Dataset",
     html_url: "https://github.com/HRifaldi/Olist-E-Commerce-Dataset",
@@ -206,7 +228,8 @@ function renderProjects() {
   els.grid.innerHTML = sorted
     .map((project) => {
       const demoUrl = project.homepage || PROJECT_DEMO_LINKS[project.name] || "";
-      const demo = demoUrl
+      const isGithubRepo = project.html_url.includes("github.com");
+      const demo = demoUrl && demoUrl !== project.html_url
         ? `<a href="${escapeHtml(demoUrl)}" target="_blank" rel="noreferrer">Demo</a>`
         : "";
 
@@ -217,7 +240,7 @@ function renderProjects() {
           <p>${escapeHtml(normalizeDescription(project))}</p>
           <div class="project-meta">Last updated: ${escapeHtml(formatDate(project.pushed_at))}</div>
           <div class="project-actions">
-            <a class="primary" href="${escapeHtml(project.html_url)}" target="_blank" rel="noreferrer">View Repo</a>
+            <a class="primary" href="${escapeHtml(project.html_url)}" target="_blank" rel="noreferrer">${isGithubRepo ? "View Repo" : "Open App"}</a>
             ${demo}
           </div>
         </article>
@@ -310,9 +333,9 @@ async function init() {
   try {
     const { user, projects } = await fetchPortfolioData();
     hydrateProfile(user);
-    state.projects = projects.length ? projects : fallbackProjects;
+    state.projects = (projects.length ? projects : fallbackProjects).concat(MANUAL_PROJECTS);
   } catch (error) {
-    state.projects = fallbackProjects;
+    state.projects = fallbackProjects.concat(MANUAL_PROJECTS);
   }
 
   renderStats(state.projects);
